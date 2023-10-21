@@ -16,6 +16,8 @@ The client can listen a stream of event and the server can send event like notif
 - Send event and data
 - Send id and retry timeout
 
+### Headers
+
 We can start by setting up the headers inside a middleware to avoid repeating the header setup:
 ```javascript
 app.use('/sse/*', async (c, next) => {
@@ -27,6 +29,8 @@ app.use('/sse/*', async (c, next) => {
 ```
 
 Wehn the headers are setup we can use the stream feature of Hono to start streaming content to the client.
+
+### Send data
 
 Follow the SSE format with data and the double line at the end.
 
@@ -41,6 +45,8 @@ app.get('/sse', (c) => {
 });
 ```
 
+### Custom event type
+
 We can send more data and setup a different event type.
 
 ```javascript
@@ -48,15 +54,23 @@ stream.write('event: close\n');
 stream.write('data: close\n\n');
 ```
 
+
+### Add an id to the event
+
 The id of each event can be configured with:
 ```javascript
 stream.write('id: 0\n');
 ```
 
+
+### Retry timeout for the browser
+
 The retry timeout can be configured as well for the client to retry if the request failed:
 ```javascript
 stream.write('retry: 1000\n'); // Miliseconds
 ```
+
+## Example endpoint
 
 Example of an sse endpoint:
 ```javascript
@@ -78,6 +92,8 @@ app.get('/sse', (c) => {
 });
 ```
 
+
+### Complete API example
 
 Full API example:
 
@@ -126,10 +142,14 @@ export default app;
 ```
 
 
+### Client example
+
 The client will listen to the SSE endpoint and receive the incoming messages:
 
 - By default a data will be received as a `message` event.
 - We can add a listener, in that case the listener on `close` event have been set. The connection will be closed.
+
+
 
 ```html
 <!DOCTYPE html>

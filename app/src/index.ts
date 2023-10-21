@@ -19,7 +19,7 @@ app.use('/sse/*', async (c, next) => {
     c.header('Cache-Control', 'no-cache');
     c.header('Connection', 'keep-alive');
     await next();
-})
+});
 
 app.get('/sse', (c) => {
 
@@ -36,6 +36,6 @@ app.get('/sse', (c) => {
         stream.write('data: close\n\n');
     })
 
-})
+});
 
-export default app
+export default app;

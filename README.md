@@ -10,6 +10,7 @@ Use [Hono framework](https://hono.dev/) with [SSE (Server Sent Event)](https://d
 ## Installation
 
 ```bash
+cd app/
 npx bun install
 npx bun run dev
 ```
